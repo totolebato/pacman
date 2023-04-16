@@ -1,0 +1,233 @@
+import tkinter as tk
+import random as rd
+from tkinter import messagebox
+
+murs = [[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+        [1,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+        [1,0,1,0,1,0,1,1,1,1,1,1,1,1,0,1,1,1,1,1,1,1,1,1,0,1,0,2,0,1],
+        [1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,1,0,0,1,0,1,0,0,0,1],
+        [1,1,1,1,1,0,1,1,1,1,0,1,1,1,0,1,0,1,1,0,1,0,1,1,0,1,1,1,1,1],
+        [1,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1],
+        [1,0,1,1,1,0,1,0,1,1,0,1,0,1,1,1,1,0,1,0,1,0,1,1,1,1,0,1,0,1],
+        [1,0,1,0,0,0,1,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,2,0,0,0,1,0,1],
+        [1,0,1,1,1,0,1,0,1,1,0,1,0,1,1,1,1,1,1,1,1,1,1,1,1,1,0,1,0,1],
+        [1,0,1,0,0,0,1,0,0,1,1,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1],
+        [1,0,1,0,1,0,1,1,1,1,0,1,0,1,0,1,1,1,1,1,1,1,0,1,1,1,0,0,0,1],
+        [1,0,1,0,1,0,0,0,0,0,0,1,1,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+        [1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,0,0,1,0,1],
+        [1,0,1,0,1,0,1,0,1,0,1,1,1,1,0,0,1,1,1,1,0,1,0,1,0,1,0,1,0,1],
+        [1,0,1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,1,0,1,0,0,0,0,0,1,0,1],
+        [1,0,1,0,1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0,1,1,1,1,1,0,1],
+        [1,0,1,0,1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,0,0,1,0,1],
+        [1,0,0,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1],
+        [1,0,1,0,1,0,1,0,1,1,1,0,1,1,1,0,1,1,1,0,1,1,0,1,0,1,0,1,2,1],
+        [1,0,1,0,0,0,1,0,1,0,1,0,0,1,0,0,0,1,0,0,0,0,0,1,0,1,0,1,0,1],
+        [1,0,1,0,1,0,0,0,1,0,1,0,1,1,1,1,0,1,0,1,1,1,0,1,0,1,0,1,0,1],
+        [1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,1,0,1,0,1,0,1,0,1,0,1,0,1],
+        [1,0,1,0,1,0,1,1,1,1,1,1,1,1,1,1,0,1,0,1,0,0,0,0,0,0,0,1,0,1],
+        [1,0,1,0,1,0,1,0,1,0,1,0,0,0,0,0,0,0,0,1,1,1,1,1,1,1,0,1,0,1],
+        [1,0,2,0,0,0,1,0,1,0,1,1,1,1,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,1],
+        [1,1,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,0,1,0,1,1,1,0,1,1,1,1,1],
+        [1,0,0,0,1,0,1,1,1,0,1,0,1,0,0,1,0,0,0,1,0,1,0,0,0,1,0,0,0,1],
+        [1,0,2,0,1,0,1,0,0,0,1,0,1,0,1,1,1,1,0,1,1,1,1,1,0,1,0,2,0,1],
+        [1,0,0,0,1,0,1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,1],
+        [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]]
+
+speed = 200
+
+class Pacman():
+    def __init__(self, can):
+        self.color = "yellow"
+        self.posx = 20
+        self.posy = 20
+        self.delta = 20
+        self.can = can
+        self.points = 0
+        self.perso = self.can.create_arc(self.posx,self.posy,self.posx+20,
+                                         self.posy+20,fill=self.color,
+                                         start=15,extent=330, tag='pacman')
+        self.can.bind_all('<Right>', self.deplaceD)
+        self.can.bind_all('<Left>', self.deplaceG)
+        self.can.bind_all('<Up>', self.deplaceH)
+        self.can.bind_all('<Down>', self.deplaceB)
+
+    def deplaceD(self,event):
+        self.can.itemconfig(self.perso, start=30,extent=300)
+        x1,y1,x2,y2 = self.can.coords(self.perso)
+        if murs[int(y1//20)][int(x1//20)+1] == 0 and x1 < 560:
+            self.can.move(self.perso,20,0)
+        self.actions()
+
+    def deplaceG(self,event):
+        self.can.itemconfig(self.perso, start=-150,extent=300)
+        x1,y1,x2,y2 = self.can.coords(self.perso)
+
+        if murs[int(y1//20)][int(x1//20)-1] in (0,2) and x1 > 20:
+            self.can.move(self.perso,-20,0)
+        self.actions()
+
+    def deplaceH(self,event):
+        self.can.itemconfig(self.perso, start=120,extent=300)
+        x1,y1,x2,y2 = self.can.coords(self.perso)
+        if murs[int(y1//20)-1][int(x1//20)] == 0 and y1 > 20:
+            self.can.move(self.perso,0,-20)
+        self.actions()
+
+    def deplaceB(self,event):
+        self.can.itemconfig(self.perso, start=-60,extent=300)
+        x1,y1,x2,y2 = self.can.coords(self.perso)
+        if murs[int(y1//20)+1][int(x1//20)] in (0,2) and y1 < 560:
+            self.can.move(self.perso,0,20)
+        self.actions()
+
+    def teleportation(self, x1, y1):
+        listePorte = [(540,40),(460,140),(560,360),(40,540),(540,540),(40,480)]
+        if (x1,y1) in listePorte:
+            newPos = rd.choice(listePorte)
+            self.can.coords(self.perso,newPos[0],newPos[1],newPos[0]+20,newPos[1]+20)
+
+    def manger(self, x1, y1, x2, y2):
+        if murs[int(y1//20)][int(x1//20)] == 0:
+            murs[int(y1//20)][int(x1//20)] == 4
+            bille = self.can.find_enclosed(x1,y1,x2,y2)
+            if len(bille) != 0 and 902 not in bille and 903 not in bille and 904 not in bille and 905 not in bille and 906 not in bille:
+                self.can.delete(bille[0])
+                self.points += 1
+                It.scoreVal.configure(text=str(self.points))
+
+    def finPartie(self):
+        if self.points == 450:
+            messagebox.showinfo("Game", "YOU WIN")
+            It.destroy()
+
+    def actions(self):
+        x1,y1,x2,y2 = self.can.coords(self.perso)
+        self.teleportation(x1, y1)
+        self.manger(x1,y1,x2,y2)
+        self.finPartie()
+
+
+class Ghost():
+    def __init__(self, can, couleur, posx, posy):
+        self.color=couleur
+        self.posx = posx
+        self.posy = posy
+        self.speed = speed
+        self.can = can
+        self.listeMouv = [(20,0),(-20,0),(0,20),(0,-20)]
+        self.fanto = self.can.create_polygon(self.posx,self.posy,self.posx+2,
+                                             self.posy-16,self.posx+6,
+                                             self.posy-20,self.posx+14,
+                                             self.posy-20,self.posx+18,
+                                             self.posy-16,self.posx+20,
+                                             self.posy,self.posx+17,
+                                             self.posy-4,self.posx+14,
+                                             self.posy,self.posx+10,
+                                             self.posy-4,self.posx+6,
+                                             self.posy,self.posx+3,
+                                             self.posy-4,self.posx,
+                                             self.posy,fill=self.color, tag='ghost')
+
+    def mouvement(self):
+        listDep = rd.choice(self.listeMouv)
+        coordF = self.can.coords(self.fanto)
+        if listDep == (20,0) and murs[int((coordF[1]-20)//20)][int(coordF[0]//20)+1] == 0:
+            self.can.move(self.fanto,listDep[0],listDep[1])
+        elif listDep == (-20,0) and murs[int((coordF[1]-20)//20)][int(coordF[0]//20)-1] == 0:
+            self.can.move(self.fanto,listDep[0],listDep[1])
+        elif listDep == (0,20) and murs[int((coordF[1]-20)//20)+1][int(coordF[0]//20)] == 0:
+            self.can.move(self.fanto,listDep[0],listDep[1])
+        elif listDep == (0,-20) and murs[int((coordF[1]-20)//20)-1][int(coordF[0]//20)] == 0:
+            self.can.move(self.fanto,listDep[0],listDep[1])
+        if 901 in self.can.find_overlapping(coordF[0]+1,coordF[1]-19,coordF[0]+18,coordF[1]-1):
+            messagebox.showinfo("Game", "Game Over {} points".format(It.scoreVal["text"]))
+            It.destroy()
+        self.can.after(self.speed,self.mouvement)
+
+    def mouvementIntel(self):
+        coordF = self.can.coords(self.fanto)
+        coordP = self.can.coords('pacman')
+        dx = coordF[0] - coordP[0]
+        dy = coordF[1] - coordP[1]
+        if 901 in self.can.find_overlapping(coordF[0]+1,coordF[1]-19,coordF[0]+18,coordF[1]-1):
+            messagebox.showinfo("Game", "Game Over {} points".format(It.scoreVal["text"]))
+            It.destroy()
+        if abs(dx) >= abs(dy):
+            if dx >= 0 and murs[int((coordF[1]-20)//20)][int(coordF[0]//20)-1] == 0:
+                self.can.move(self.fanto,-20,0)
+            elif dx < 0 and murs[int((coordF[1]-20)//20)][int(coordF[0]//20)+1] == 0:
+                self.can.move(self.fanto,20,0)
+            elif dy > 0 and murs[int((coordF[1]-20)//20)+1][int(coordF[0]//20)] == 0:
+                self.can.move(self.fanto,0,20)
+            elif dy <= 0 and murs[int((coordF[1]-20)//20)-1][int(coordF[0]//20)] == 0:
+                self.can.move(self.fanto,0,-20)
+        else :
+            if dy >= 0 and murs[int((coordF[1]-20)//20)-1][int(coordF[0]//20)] == 0:
+                self.can.move(self.fanto,0,-20)
+            elif dy < 0 and murs[int((coordF[1]-20)//20)+1][int(coordF[0]//20)] == 0:
+                self.can.move(self.fanto,0,20)
+            elif dx > 0 and murs[int((coordF[1]-20)//20)][int(coordF[0]//20)-1] == 0:
+                self.can.move(self.fanto,-20,0)
+            elif dx <= 0 and murs[int((coordF[1]-20)//20)][int(coordF[0]//20)+1] == 0:
+                self.can.move(self.fanto,20,0)
+        self.can.after(self.speed,self.mouvementIntel)
+
+
+
+
+class Gui(tk.Tk):
+    def __init__(self):
+        tk.Tk.__init__(self)
+        self.title("PacMan 2.0")
+        self.zone = tk.Canvas(width = 600, height = 600, bg='black')
+        self.zone.grid()
+        self.score = tk.Label(text='score')
+        self.score.grid()
+        self.scoreVal = tk.Label(text='0')
+        self.scoreVal.grid()
+        self.afficheMur()
+        self.pac = Pacman(self.zone)
+        self.fan1 = Ghost(self.zone, 'cyan', 300,300)
+        self.fan2 = Ghost(self.zone,'red', 320,300)
+        self.fan3 = Ghost(self.zone, 'green', 300,320)
+        self.fan4 = Ghost(self.zone,'orange', 140,200)
+        self.fan5 = Ghost(self.zone,'purple', 520,540)
+        self.fan6 = Ghost(self.zone,'blue', 520,500)
+        self.fan1.mouvementIntel()
+        self.fan2.mouvement()
+        self.fan3.mouvement()
+        self.fan4.mouvementIntel()
+        self.fan5.mouvement()
+        self.fan6.mouvementIntel()
+
+    def afficheMur(self):
+        for ligne in range(30):
+            for col in range(30):
+                if murs[ligne][col] == 1:
+                    self.zone.create_rectangle(col*20,ligne*20,col*20+20,ligne*20+20,fill="navy blue")
+                if murs[ligne][col] == 2:
+                    self.zone.create_rectangle(col*20,ligne*20,col*20+20,ligne*20+20,fill="orange")
+                if murs[ligne][col] == 0:
+                    self.zone.create_oval(col*20+7,ligne*20+7,col*20+7+6,ligne*20+7+6,fill="ivory")
+
+
+class Chrono(tk.Label):
+    def __init__(self,root,startTime=70):
+        tk.Label.__init__(self,root,text='Starting...')
+
+        self.value=startTime
+        self.font=('Helvetica', 36, 'normal')
+        self.__setitem__('font',self.font)
+        self.after(1000,self.count)
+
+    def formatTime(self):
+        return str(self.value/60)+': '+str(self.value%60)
+
+    def count(self):
+        self.value=self.value-1
+        self.__setitem__('text',self.formatTime())
+        self.after(1000,self.count)
+#problème chrono
+if __name__ == "__main__":
+    It = Gui()
+    It.mainloop()
